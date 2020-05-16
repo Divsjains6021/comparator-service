@@ -1,5 +1,6 @@
 package com.propertydekho.comparatorservice.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class PropMetaDataList {
 
 
+    @JsonProperty("prop_list")
     private List<PropFilterableSortableData> propFilterableSortableData;
 
     public PropMetaDataList() {
