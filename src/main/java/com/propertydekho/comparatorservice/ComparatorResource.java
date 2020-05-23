@@ -4,6 +4,7 @@ import com.propertydekho.comparatorservice.models.AreaPropertiesList;
 import com.propertydekho.comparatorservice.models.PropFilterableSortableData;
 import com.propertydekho.comparatorservice.models.PropMetaDataList;
 import com.propertydekho.comparatorservice.models.PropsComparatorInput;
+import com.propertydekho.comparatorservice.views.AreaWisePropertiesView;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,5 +39,10 @@ public class ComparatorResource
         allProperties.addAll(nonIndexedProperties);
         allProperties.sort(SorterFactory.getSorter("prop-price-ascend"));
         return PropMetaDataList.builder().propFilterableSortableData(allProperties).build();
+    }
+
+
+    public PropMetaDataList mergeProperties(@RequestBody AreaWisePropertiesView view) {
+        return SortHelper.sortProperties(view);
     }
 }
