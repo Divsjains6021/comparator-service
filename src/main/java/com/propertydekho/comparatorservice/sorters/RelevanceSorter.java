@@ -9,7 +9,6 @@ public class RelevanceSorter implements PropSorter
 
         double relativePrice = Math.min(prop1.getPropPrice(), prop2.getPropPrice());
         // Update relative price
-        return (int) (prop1.getPropPrice() <= prop2.getPropPrice() ? relativePrice - prop2.getPropPrice() :
-                prop2.getPropPrice() - relativePrice);
+        return (int) (relativePrice - Math.max(prop1.getPropPrice(), prop2.getPropPrice()));
     }
 }
