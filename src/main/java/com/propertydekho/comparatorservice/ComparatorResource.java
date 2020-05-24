@@ -1,7 +1,7 @@
 package com.propertydekho.comparatorservice;
 
+import com.propertydekho.comparatorservice.entity.PropFilterableSortableData;
 import com.propertydekho.comparatorservice.models.AreaPropertiesList;
-import com.propertydekho.comparatorservice.models.PropFilterableSortableData;
 import com.propertydekho.comparatorservice.models.PropMetaDataList;
 import com.propertydekho.comparatorservice.models.PropsComparatorInput;
 import com.propertydekho.comparatorservice.views.AreaWisePropertiesView;

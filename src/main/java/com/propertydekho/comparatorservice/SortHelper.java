@@ -1,10 +1,9 @@
 package com.propertydekho.comparatorservice;
 
-import com.propertydekho.comparatorservice.models.PropFilterableSortableData;
+import com.propertydekho.comparatorservice.entity.PropFilterableSortableData;
 import com.propertydekho.comparatorservice.models.PropMetaDataList;
 import com.propertydekho.comparatorservice.sorters.PropSorter;
 import com.propertydekho.comparatorservice.views.AreaWisePropertiesView;
-import org.springframework.scheduling.annotation.Async;
 
 import java.util.*;
 
