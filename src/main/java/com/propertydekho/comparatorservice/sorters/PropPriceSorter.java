@@ -1,4 +1,4 @@
-package com.propertydekho.comparatorservice;
+package com.propertydekho.comparatorservice.sorters;
 
 import com.propertydekho.comparatorservice.models.PropFilterableSortableData;
 
