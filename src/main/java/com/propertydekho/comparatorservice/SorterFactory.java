@@ -14,6 +14,9 @@ public class SorterFactory
         if ("prop-price-ascend".equalsIgnoreCase(sorter)) {
             return new PropPriceSorter(true);
         }
+        if ("prop-price-descend".equalsIgnoreCase(sorter)) {
+            return new PropPriceSorter(false);
+        }
         if ("relevancy".equalsIgnoreCase(sorter)) {
             return new RelevanceSorter();
         }

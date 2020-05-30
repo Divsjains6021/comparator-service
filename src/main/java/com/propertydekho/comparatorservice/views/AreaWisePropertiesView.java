@@ -2,11 +2,15 @@ package com.propertydekho.comparatorservice.views;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.propertydekho.comparatorservice.models.PropMetaDataList;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 public class AreaWisePropertiesView
@@ -16,12 +20,4 @@ public class AreaWisePropertiesView
 
     @JsonProperty("sorter")
     private String sorter;
-
-    public AreaWisePropertiesView() {
-    }
-
-    public AreaWisePropertiesView(Map<String, PropMetaDataList> areaWiseProperties, String sorter) {
-        this.areaWiseProperties = areaWiseProperties;
-        this.sorter = sorter;
-    }
 }
