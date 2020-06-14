@@ -4,9 +4,14 @@ import com.propertydekho.comparatorservice.models.PropFilterableSortableData;
 import com.propertydekho.comparatorservice.models.PropMetaDataList;
 import com.propertydekho.comparatorservice.sorters.PropSorter;
 import com.propertydekho.comparatorservice.views.AreaWisePropertiesView;
-import org.springframework.scheduling.annotation.Async;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class SortHelper
 {
@@ -18,11 +23,10 @@ public class SortHelper
     public static PropMetaDataList sortProperties(AreaWisePropertiesView view) {
         PriorityQueue<PropFilterableSortableData> sortedAllQueue = new PriorityQueue<>(2,
                 SorterFactory.getSorter(view.getSorter()));
-        Map<String, PropMetaDataList> areaWiseProperties = view.getAreaWiseProperties();
         Map<String, Queue<PropFilterableSortableData>> areaWiseSortedProps = getSortedQueues(view);
 
         // Adding head of all area queues to the sorted all queue.
-        areaWiseProperties.keySet()
+        areaWiseSortedProps.keySet()
                 .forEach(area -> {
                     Queue<PropFilterableSortableData> areaQueue = areaWiseSortedProps.get(area);
                     if (!areaQueue.isEmpty()) {
@@ -38,7 +42,7 @@ public class SortHelper
             sortedAllProperties.add(removedProperty);
 
             Queue<PropFilterableSortableData> nextQueue = areaWiseSortedProps.get(removedProperty.getArea());
-            if (!nextQueue.isEmpty()) {
+            if (nextQueue != null && !nextQueue.isEmpty()) {
                 sortedAllQueue.add(nextQueue.remove());
             }
 
@@ -53,11 +57,12 @@ public class SortHelper
         Map<String, PropMetaDataList> areaWiseProperties = view.getAreaWiseProperties();
         PropSorter sorter = SorterFactory.getSorter(view.getSorter());
         Map<String, Queue<PropFilterableSortableData>> sortedPropQueues = new HashMap<>();
-        areaWiseProperties.forEach((key, value) -> sortAreaList(sorter, value, sortedPropQueues, key));
+        areaWiseProperties.entrySet()
+                .parallelStream()
+                .forEach(entry -> sortAreaList(sorter, entry.getValue(), sortedPropQueues, entry.getKey()));
         return sortedPropQueues;
     }
 
-//    @Async
     private static void sortAreaList(PropSorter sorter, PropMetaDataList value, Map<String,
             Queue<PropFilterableSortableData>> sortedPropQueues, String area) {
         List<PropFilterableSortableData> properties = value.getPropFilterableSortableData();
