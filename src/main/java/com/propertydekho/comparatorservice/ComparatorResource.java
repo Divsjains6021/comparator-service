@@ -19,7 +19,7 @@ import java.util.Map;
 public class ComparatorResource
 {
 
-    public static final String DEFAULT_SORTER = "prop-price-ascend";
+    public static final String DEFAULT_SORTER = "relevancy";
 
     @PostMapping("/compare-properties")
     public PropMetaDataList compareProperties(@RequestBody PropsComparatorInput propsComparatorInput) {
